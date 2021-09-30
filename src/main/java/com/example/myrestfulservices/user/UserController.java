@@ -56,4 +56,13 @@ public class UserController {
         }
     }
 
+    @PutMapping("/users/{id}")
+    public void putUser(@PathVariable int id, @RequestBody User user){
+        User savedUser = service.putById(user, id);
+
+        if (savedUser == null) {
+            throw new UserNotFoundException(String.format("ID[%s] not found", id));
+        }
+    }
+
 }

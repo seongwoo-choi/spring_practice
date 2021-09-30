@@ -54,4 +54,14 @@ public class UserDaoService {
         }
         return null;
     }
+
+    public User putById(User user, int id) {
+        for (User forUser : users) {
+            if (forUser.getId() == id) {
+                forUser.setName(user.getName());
+                return forUser;
+            }
+        }
+        return null;
+    }
 }
