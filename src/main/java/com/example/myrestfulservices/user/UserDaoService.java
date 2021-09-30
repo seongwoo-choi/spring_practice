@@ -1,11 +1,14 @@
 package com.example.myrestfulservices.user;
 
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 // 비즈니스 로직
+@Service
 public class UserDaoService {
     private static List<User> users = new ArrayList<>();
     private static int usersCount = 3;
