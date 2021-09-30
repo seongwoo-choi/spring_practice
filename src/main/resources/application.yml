@@ -5,3 +5,7 @@
 server:
   port: 8088
 
+# 우리가 사용할 다국어 파일의 이름을 messages 로 지정
+spring:
+  messages:
+    basename: messages

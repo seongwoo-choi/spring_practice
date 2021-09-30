@@ -36,7 +36,7 @@ public class customizeResponseEntityExceptionsHandler extends ResponseEntityExce
     }
 
     // 상위 클래스의 메소드 재정의
-    // 용
+    // @Valid로 requestBody로 들어온 객체의 검증이 이루어지면서 Bad Request 가 나가는 경우에 custom 한 error handling
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), "Validation Failed", ex.getBindingResult().toString());
