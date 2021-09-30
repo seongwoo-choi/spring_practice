@@ -1,5 +1,6 @@
 package com.example.myrestfulservices.user;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,8 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 // value 에 해당하는 속성의 값들이 JSON 에 나타나지 않는다.
-@JsonIgnoreProperties(value={"password", "ssn"})
+//@JsonIgnoreProperties(value={"password", "ssn"})
+@JsonFilter("UserInfo")
 public class User {
     private Integer id;
 
