@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -32,8 +33,9 @@ public class UserController {
         return user;
     }
 
+    // @Valid => User 도메인 클래스에서 설정한 값을 바탕으로 유효성 검사를 한다.
     @PostMapping("/users")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         User saveUser = service.save(user);
 
         // server 에서 반환하려는 값을 response 에 담기 위해 ServletUriComponentsBuilder 을 사용한다.
