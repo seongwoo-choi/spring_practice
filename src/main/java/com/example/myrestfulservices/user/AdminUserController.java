@@ -41,7 +41,12 @@ public class AdminUserController {
     }
 
     // /admin/users/{id} => /admin/v1/users/{id}
-    @GetMapping("/v1/users/{id}")
+    // @GetMapping("/v1/users/{id}")
+
+    // /admin/users/3/?version=2
+    // GetMapping 에 두 가지 이상의 정보가 올 때는 value 안에 엔드포인트를 적어 넣는다.
+    // {id}/ 로 끝나는 이유는 / 뒤에 version 이라는 정보가 추가로 전달되어야 하기 때문에 넣는 것이다.
+    @GetMapping(value = "/users/{id}/", params = "version=1")
     public MappingJacksonValue retrieveUserV1(@PathVariable int id) {
         User user = service.findOne(id);
 
@@ -63,7 +68,8 @@ public class AdminUserController {
     }
 
 
-    @GetMapping("/v2/users/{id}")
+    // @GetMapping("/v2/users/{id}")
+    @GetMapping(value = "/users/{id}/", params = "version=2")
     public MappingJacksonValue retrieveUserV2(@PathVariable int id) {
         User user = service.findOne(id);
 
