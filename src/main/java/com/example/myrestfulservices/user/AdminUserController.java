@@ -46,12 +46,15 @@ public class AdminUserController {
     // /admin/users/3/?version=2
     // GetMapping 에 두 가지 이상의 정보가 올 때는 value 안에 엔드포인트를 적어 넣는다.
     // {id}/ 로 끝나는 이유는 / 뒤에 version 이라는 정보가 추가로 전달되어야 하기 때문에 넣는 것이다.
-    @GetMapping(value = "/users/{id}/", params = "version=1")
+    // @GetMapping(value = "/users/{id}/", params = "version=1")
+
+    // header 에 키값으로 X-API-VERSION 밸류 값으로 1 이 오면 아래 컨트롤러에서 값을 처리
+    @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=1")
     public MappingJacksonValue retrieveUserV1(@PathVariable int id) {
         User user = service.findOne(id);
 
         if ( user == null) {
-            throw new UserNotFoundException(String.format("ID[%s] not found", id));
+                    throw new UserNotFoundException(String.format("ID[%s] not found", id));
         }
 
         // filter 생성 filterOutAllExcept() 안에 존재하는 속성들을 불러옴
@@ -69,7 +72,8 @@ public class AdminUserController {
 
 
     // @GetMapping("/v2/users/{id}")
-    @GetMapping(value = "/users/{id}/", params = "version=2")
+    // @GetMapping(value = "/users/{id}/", params = "version=2")
+    @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=2")
     public MappingJacksonValue retrieveUserV2(@PathVariable int id) {
         User user = service.findOne(id);
 
