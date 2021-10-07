@@ -49,7 +49,10 @@ public class AdminUserController {
     // @GetMapping(value = "/users/{id}/", params = "version=1")
 
     // header 에 키값으로 X-API-VERSION 밸류 값으로 1 이 오면 아래 컨트롤러에서 값을 처리
-    @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=1")
+    // @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=1")
+
+    // mime 타입을 이용하는 방법
+    @GetMapping(value = "/users/{id}", produces = "application/vnd.company.appv1+json")
     public MappingJacksonValue retrieveUserV1(@PathVariable int id) {
         User user = service.findOne(id);
 
@@ -73,7 +76,8 @@ public class AdminUserController {
 
     // @GetMapping("/v2/users/{id}")
     // @GetMapping(value = "/users/{id}/", params = "version=2")
-    @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=2")
+    // @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=2")
+    @GetMapping(value = "/users/{id}", produces = "application/vnd.company.appv2+json")
     public MappingJacksonValue retrieveUserV2(@PathVariable int id) {
         User user = service.findOne(id);
 
