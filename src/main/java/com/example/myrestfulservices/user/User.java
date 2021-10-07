@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -15,6 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 // value 에 해당하는 속성의 값들이 JSON 에 나타나지 않는다.
 //@JsonIgnoreProperties(value={"password", "ssn"})
+@NoArgsConstructor
 @JsonFilter("UserInfo")
 public class User {
     private Integer id;
