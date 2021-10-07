@@ -24,8 +24,19 @@ public class AdminUserController {
 
     // RequestMapping("/admin") => 모든 url 의 프리픽스로 /admin 이 붙는다. => /admin/users
     @GetMapping("/users")
-    public List<User> retrieveAllUsers() {
-        return service.findAll();
+    public MappingJacksonValue retrieveAllUsers() {
+
+        List<User> users = service.findAll();
+
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter
+                .filterOutAllExcept("id", "name", "joniDate", "password");
+
+        FilterProvider filters = new SimpleFilterProvider().addFilter("UserInfo", filter);
+
+        MappingJacksonValue mapping = new MappingJacksonValue(users);
+        mapping.setFilters(filters);
+
+        return mapping;
     }
 
     // /admin/users/{id}
@@ -37,6 +48,7 @@ public class AdminUserController {
             throw new UserNotFoundException(String.format("ID[%s] not found", id));
         }
 
+        // filter 생성 filterOutAllExcept() 안에 존재하는 속성들을 불러옴
         SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter
                 .filterOutAllExcept("id", "name", "joniDate", "ssn", "password");
 
